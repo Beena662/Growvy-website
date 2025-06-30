@@ -1,0 +1,501 @@
+/* ====================================================================
+   Google Font import
+   Great Vibes is used only for the decorative “Growvy” script overlay
+   ==================================================================== */
+   @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+
+   /* ====================================================================
+      DESIGN TOKENS — tweak these to reskin the whole site quickly
+      ==================================================================== */
+   :root {
+     /* Fonts */
+     --font-base: 'Segoe UI', sans-serif;
+     --font-display: 'Great Vibes', cursive;
+   
+     /* Core palette */
+     --clr-bg          : #f8f9fb;
+     --clr-text        : #333;
+     --clr-primary     : #2b66ff;   /* bright royal‑blue */
+     --clr-accent      : #ff9800;   /* orange highlight */
+     --clr-header-dark : #272c36;   /* navbar background */
+     --clr-footer-dark : #1b1f28;   /* footer background */
+     --clr-footer-text : #e0e0e0;
+   
+     /* Neutrals & greys */
+     --clr-grey-100: #f1f3f6;
+     --clr-grey-200: #ccc;
+     --clr-grey-300: #bbb;
+     --clr-grey-400: #555;
+   
+     /* Radii */
+     --radius-sm: 5px;
+     --radius-md: 10px;
+     --radius-lg: 12px;
+   
+     /* Shadows */
+     --shadow-sm: 0 2px 6px rgba(0,0,0,.1);
+     --shadow-md: 0 2px 8px rgba(0,0,0,.05);
+   }
+   
+   
+   /* ====================================================================
+      RESET & BASE
+      A very small reset so every element starts from the same baseline
+      ==================================================================== */
+   * {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+     font-family: var(--font-base);
+   }
+   
+   body {
+     background : var(--clr-bg);
+     color      : var(--clr-text);
+     line-height: 1.6;
+   }
+   
+   .container {
+     max-width: 1200px;
+     margin   : auto;
+     padding  : 20px;
+   }
+   
+   a {
+     text-decoration: none;
+   }
+   
+   
+   /* ====================================================================
+      HEADER / NAVBAR
+      Fixed‑width flex row that wraps on mobile
+      ==================================================================== */
+   .header {
+     background: var(--clr-header-dark);
+     color     : #fff;
+   }
+   
+   .header .container {
+     display        : flex;
+     justify-content: space-between;
+     align-items    : center;
+     gap            : 24px;
+     flex-wrap      : nowrap;
+   }
+   
+   .logo {
+     font-size  : 26px;
+     font-weight: 700;
+     color      : #fff;
+   }
+   
+   .navbar {
+     display  : flex;
+     gap      : 24px;
+     margin-left: auto; /* push links to the right */
+     flex-wrap: nowrap;
+   }
+   
+   .navbar a {
+     color      : #fff;
+     font-size  : 15px;
+     font-weight: 500;
+     transition : .3s;
+   }
+   
+   .navbar a:hover,
+   .navbar a.active {
+     color: var(--clr-accent);
+   }
+   
+   /*  Mobile breakpoint — stack the links below the logo  */
+   @media (max-width: 700px) {
+     .header .container { flex-direction: column; align-items: flex-start; }
+     .navbar           { margin-left: 0; margin-top: 12px; flex-wrap: wrap; }
+   }
+   
+   
+   /* ====================================================================
+      HERO SECTION
+      Full‑width banner with background image + blue overlay mask
+      ==================================================================== */
+   .hero {
+     position     : relative;
+     color        : #fff;
+     text-align   : center;
+     padding      : 80px 20px;
+     background   : url('https://images.unsplash.com/photo-1542744095-291d1f67b221?auto=format&fit=crop&w=1200&q=60') center/cover;
+   }
+   
+   /* Semi‑transparent blue overlay to ensure text legibility */
+   .hero::after {
+     content : "";
+     position: absolute;
+     inset   : 0;
+     background: rgba(43,102,255,.6);
+   }
+   
+   .hero .container {
+     position: relative; /* lift above overlay */
+     z-index : 1;
+   }
+   
+   .hero h1 {
+     font-size  : 36px;
+     margin-bottom: 15px;
+     font-weight: 700;
+   }
+   
+   .highlight { color: #fdd835; }
+   
+   .subheading {
+     font-size  : 18px;
+     margin-bottom: 25px;
+   }
+   
+   /* Decorative arrow + script word floating over hero image */
+   .hero-graphics {
+     position       : relative;
+     height         : 260px;
+     margin-top     : 20px;
+     pointer-events : none; /* purely visual */
+   }
+   .hero-graphics img,
+   .hero-graphics span {
+     position: absolute;
+   }
+   
+   .arrow {
+     right   : -180px;   /* push arrow further right */
+     top     : -200px;   /* raise it above hero */
+     width   : 300px;    /* longer arrow for balance */
+     transform: rotate(3deg);
+     opacity : .22;
+   }
+   
+   .growvy-script {
+     right   : -152px;
+     top     : -150px;
+     font    : 110px var(--font-display);
+     color   : #000;
+     text-shadow: 0 3px 6px rgba(0,0,0,.15);
+     transform: rotate(-1deg);
+     z-index : 2;
+   }
+   
+   
+   /* ====================================================================
+      BUTTONS — base + variations
+      ==================================================================== */
+   .btn {
+     display      : inline-block;
+     padding      : 10px 22px;
+     font-size    : 16px;
+     border-radius: var(--radius-sm);
+     transition   : .3s;
+   }
+   
+   .btn-primary {
+     background: var(--clr-accent);
+     color     : #fff;
+   }
+   .btn-primary:hover { opacity: .9; }
+   
+   .btn-secondary {
+     background: #fff;
+     color     : var(--clr-primary);
+     border    : 1px solid var(--clr-primary);
+   }
+   .btn-secondary:hover {
+     background: var(--clr-primary);
+     color     : #fff;
+   }
+   
+   
+   /* ====================================================================
+      GENERIC SECTION STYLES
+      ==================================================================== */
+   .mission {
+     text-align: center;
+     padding   : 40px 20px;
+     background: #fff;
+   }
+   
+   .users {
+     padding   : 40px 20px;
+     background: var(--clr-grey-100);
+   }
+   
+   .grid {
+     display    : flex;
+     flex-wrap  : wrap;
+     gap        : 20px;
+     justify-content: space-between;
+   }
+   
+   /* Card representing a single user */
+   .user-box {
+     flex          : 1 1 22%;
+     background    : #fff;
+     padding       : 20px;
+     border-radius : var(--radius-md);
+     text-align    : center;
+     box-shadow    : var(--shadow-sm);
+     transition    : .3s;
+   }
+   .user-box:hover { transform: translateY(-5px); }
+   
+   .user-box img {
+     width       : 100%;
+     height      : 190px;
+     object-fit  : cover;
+     border-radius: var(--radius-lg);
+     margin-bottom: 15px;
+     box-shadow  : 0 2px 6px rgba(0,0,0,.08);
+   }
+   
+   .cta {
+     text-align : center;
+     padding    : 40px 20px;
+     background : #e3f2fd;
+   }
+   
+   /* ───────── PROMO BLOCKS (image + copy) ───────── */
+   .promo-white {
+     background: #fff;
+     padding   : 60px 20px;
+   }
+   
+   .two-col {
+     display  : flex;
+     align-items: center;
+     gap      : 28px;
+     flex-wrap: wrap;
+   }
+   .two-col.reverse { flex-direction: row-reverse; }
+   
+   .promo-img {
+     width       : 260px;
+     height      : auto;
+     border-radius: var(--radius-lg);
+     box-shadow  : var(--shadow-sm);
+   }
+   
+   .promo-copy {
+     flex      : 1 1 300px;
+     text-align: left;
+   }
+   .promo-copy h2 {
+     font-size  : 24px;
+     margin-bottom: 10px;
+     color      : var(--clr-primary);
+   }
+   .promo-copy p {
+     margin-bottom: 18px;
+     color        : var(--clr-grey-400);
+   }
+   
+   /*  Stacked layout on very small screens  */
+   @media (max-width: 540px) {
+     .two-col, .two-col.reverse { flex-direction: column; text-align: center; }
+     .promo-img { width: 220px; margin: 0 auto; }
+     .promo-copy { text-align: center; }
+   }
+   
+   
+   /* ====================================================================
+      FOOTER
+      Grid layout: brand on left, links on right; stacks on mobile
+      ==================================================================== */
+   .footer {
+     background : var(--clr-footer-dark);
+     color      : var(--clr-footer-text);
+     padding    : 60px 20px 30px;
+     border-top : 4px solid var(--clr-accent);
+   }
+   
+   .footer-flex {
+     display              : grid;
+     grid-template-columns: 1fr auto;
+     gap                  : 40px;
+     align-items          : start;
+   }
+   
+   .footer-brand {
+     font-size  : 28px;
+     font-weight: 700;
+     color      : var(--clr-accent);
+     margin-bottom: 12px;
+   }
+   .brand-description {
+     font-size  : 15px;
+     line-height: 1.6;
+     color      : #ccc;
+     max-width  : 420px;
+     margin-bottom: 22px;
+   }
+   
+   .footer-links {
+     display       : flex;
+     flex-direction: column;
+     gap           : 10px;
+   }
+   .footer-links a {
+     color     : var(--clr-footer-text);
+     font-size : 15px;
+     transition: .3s;
+   }
+   .footer-links a:hover { color: var(--clr-accent); }
+   
+   .footer-social {
+     display : flex;
+     gap     : 14px;
+     margin-top: 22px;
+   }
+   .footer-social a {
+     font-size : 20px;
+     color     : var(--clr-footer-text);
+     transition: .3s;
+   }
+   .footer-social a:hover { color: var(--clr-accent); }
+   
+   .footer p {
+     text-align : center;
+     margin-top : 40px;
+     font-size  : 14px;
+     color      : var(--clr-grey-300);
+   }
+   
+   @media (max-width: 700px) {
+     .footer-flex  { grid-template-columns: 1fr; }
+     .footer-links { flex-direction: row; flex-wrap: wrap; justify-content: center; }
+     .footer-social{ justify-content: center; margin-top: 18px; text-align: center; }
+     .brand-description { text-align: center; }
+   }
+   
+   
+   /* ====================================================================
+      FORMS
+      Make inputs stretch the full column width
+      ==================================================================== */
+   .job-form,
+   label,
+   input,
+   textarea { width: 100%; }
+   
+   label { margin: 15px 0 5px; display: block; }
+   
+   input,
+   textarea {
+     padding      : 10px;
+     border       : 1px solid var(--clr-grey-200);
+     border-radius: var(--radius-sm);
+   }
+   
+   .btn-primary,
+   button.btn-primary { cursor: pointer; }
+   
+   
+   /* ====================================================================
+      SUCCESS PAGE & COMPONENT‑LEVEL ELEMENTS
+      ==================================================================== */
+   .clients-block,
+   .community-block {
+     background: #fff;
+     padding   : 60px 20px;
+     text-align: center;
+   }
+   
+   .clients-block h3 { font-size: 24px; font-weight: 700; margin-bottom: 25px; }
+   
+   .logos {
+     display        : flex;
+     justify-content: center;
+     gap            : 40px;
+     flex-wrap      : wrap;
+     margin-top     : 30px;
+   }
+   .logos img {
+     width : 90px;
+     height: 90px;
+     object-fit: contain;
+   }
+   
+   .community-block h3 {
+     font-size  : 26px;
+     font-weight: 700;
+     max-width  : 500px;
+     margin     : 0 auto 15px;
+     line-height: 1.3;
+   }
+   .community-block .tagline {
+     font-size  : 15px;
+     color      : var(--clr-grey-400);
+     margin-bottom: 25px;
+   }
+   
+   .testimonials {
+     display        : flex;
+     justify-content: center;
+     gap            : 30px;
+     flex-wrap      : wrap;
+     margin-top     : 40px;
+   }
+   
+   .card-testimonial {
+     flex          : 1 1 260px;
+     max-width     : 280px;
+     border        : 3px solid #bfe8b9;
+     border-radius : var(--radius-lg);
+     padding       : 20px;
+     text-align    : center;
+     position      : relative;
+     background    : #fff;
+     box-shadow    : var(--shadow-md);
+   }
+   .card-testimonial::before {
+     content : '';
+     position: absolute;
+     top     : 0;
+     left    : 20px;
+     width   : calc(100% - 40px);
+     height  : 3px;
+     background: #04d600;
+   }
+   .card-testimonial img {
+     width       : 56px;
+     height      : 56px;
+     border-radius: 50%;
+     object-fit  : cover;
+     margin-bottom: 12px;
+   }
+   .stars { color: #ffc107; margin-top: 10px; }
+   
+   .divider-dots {
+     width   : 100%;
+     height  : 14px;
+     margin  : 50px 0 0;
+     background: repeating-linear-gradient(90deg, #04d600 0 10px, transparent 10px 25px);
+     border-radius: 7px;
+   }
+   .squiggle {
+     margin: 40px auto 0;
+     display: block;
+     width : 180px;
+   }
+   
+   
+   /* ====================================================================
+      RESPONSIVE — generic tweaks
+      ==================================================================== */
+   @media (max-width: 768px) {
+     .user-box  { flex: 1 1 48%; }
+     .logos img { width: 70px; height: 70px; }
+   }
+   
+   @media (max-width: 480px) {
+     .user-box  { flex: 1 1 100%; }
+     .hero h1   { font-size: 30px; }
+     .card-testimonial { max-width: 100%; }
+   }
+   

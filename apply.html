@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apply for Job – Growvy</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+  <div class="container">
+    <div class="logo">Growvy</div>
+    <nav class="navbar">
+      <a href="index.html">Home</a>
+      <a href="jobs.html">Jobs</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="services.html">Services</a>
+      <a href="success.html">Success</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Main Form Section -->
+<main class="main-content">
+  <section class="form-section container">
+    <h2>Apply for This Job</h2>
+    <form class="job-form" id="applyForm">
+      <label for="fullname">Full Name:</label>
+      <input type="text" id="fullname" name="fullname" required />
+
+      <label for="email">Email Address:</label>
+      <input type="email" id="email" name="email" required />
+
+      <label for="phone">Phone Number:</label>
+      <input type="tel" id="phone" name="phone" required />
+
+      <label for="position">Position Applying For:</label>
+      <input type="text" id="position" name="position" required />
+
+      <label for="cv">Upload CV (PDF):</label>
+      <input type="file" id="cv" name="cv" accept=".pdf" required />
+
+      <label for="message">Message:</label>
+      <textarea id="message" name="message" rows="5" placeholder="Optional message to employer..."></textarea>
+
+      <button type="submit" class="btn-primary">Submit Application</button>
+    </form>
+
+    <p id="successMsg" style="display:none;color:green;font-weight:bold;margin-top:20px;">
+      🎉 Thank you! Your application has been submitted.
+    </p>
+  </section>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <p>&copy; 2025 Growvy. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- JS: Submit Handling -->
+<script>
+document.getElementById('applyForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const msg = document.getElementById('successMsg');
+  msg.style.display = 'block';
+  msg.scrollIntoView({ behavior: 'smooth' });
+  this.reset();
+});
+
+// Optional: Validate file size < 5MB
+document.getElementById('cv').addEventListener('change', function () {
+  const file = this.files[0];
+  if (file && file.size > 5 * 1024 * 1024) {
+    alert('❌ File size should be under 5MB');
+    this.value = '';
+  }
+});
+</script>
+
+</body>
+</html>
